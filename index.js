@@ -24,7 +24,10 @@ module.exports = function (name, cb) {
 		var version 	= data_parsed[ 'dist-tags' ].latest;
 		var description = data_parsed.description;
 		var license 	= data_parsed.license;
-		
+
+
+		var latest = data_parsed.versions[version];
+
 		if(data_parsed.homepage !== undefined){
 			var homepage 	= data_parsed.homepage;
 		}
@@ -52,7 +55,9 @@ module.exports = function (name, cb) {
 			description		: description,
 			license			: license,
 			homepage		: homepage,
-			author			: author_name
+			author			: author_name,
+			dependencies: latest.dependencies || {},
+			devDependencies: latest.devDependencies || {}
 		});
 	});
 };
